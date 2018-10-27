@@ -15,7 +15,7 @@ public:
 	bool isEmpty() { return (root == NULL); } //Checks to see if there is anything in the tree.
 	void addNode(string theTerm, string theDefinition);
 	//FIXME may not need both strings
-	void deleteNode(Node* node, string theTerm, string theDefintition);
+	void deleteNode(Node* node, string theTerm);
 	
 	//Basic traversals of the tree.
 	void levelOrder(Node* node);
