@@ -165,6 +165,9 @@
     <ClCompile Include="Scroggins_Glossary_Tree.cpp" />
     <ClCompile Include="Tree.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Terms.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,0 +1,20 @@
+Binary File	A series of bytes in a file that can be accessed according to their data types without string processing and delimiters
+Chaining	A collision resolution scheme where the data is stored in a linked format such as in a linked list connected to each position in the table
+Clustering	A non-uniform distrubution of data in a hash table where large segments of the table are filled while others are empty
+Collision	When two or more different keys hash to the same value or position in a hash table
+Collision Resolution Scheme	A way of handling collisions, that is, when two or more items should be kept in the same location, especially in a hash table
+Hash Function	A formula that provides the home position in the hash table for data
+Hash Table	A dictionary in which keys are mapped to array positions by a hash function. It Provides a O(1) look up for searches based on keys
+Home Position	The position originally designated by the hash function for a particular data item
+Index File	A small file that contains search values and the location of the larger data - these files are often used to speed up non-primary key searches
+Linear Probing	A form of collision resoulution that looks for the desired position by looking at the next adjacent position until the desired position has been found. This form of probing is generally not used because of clustering
+Load	An important density measure for a hash table that is computed by the number of data items over the number of positions in the hash table
+Open Addressing	Any collision resolution scheme that places all the data in the hash table rather than relying on some way of storing some of the data outside the table.
+Perfect Hash Position	A hash function that places all the data in their home positions without any collisions
+Quadratic Probing	A collision resolution scheme designed to avoid clustering. Instead of probing simply to the next availible position, ... checks first for the next position, but then check for the 4th, than 9th.
+Binary Heap	A complete binary tree where every node has a key more extreme ( greater or lesser) than or equal to the key of its parent
+Heap	Generally a binary tree where every level of the tree is filled except for the lowest level which is filled left to right
+Heap Property	Each node in the heap has an equality or more important in relation to its descendants
+Heap Sort	In a min or Max heap, the progressive removal of modes from the top of the heap will result in a sorted traversal of the data
+Max Heap Property	Each node in a tree has a key which is less than or equal to the key of its parent
+Min Heap Property	each node in a tree has a key which is greater than or equal to the key of its parent

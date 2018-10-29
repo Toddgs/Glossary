@@ -1,8 +1,10 @@
 #pragma once
+#include "pch.h"
 #include <stdio.h>
 #include <queue>
 #include <iostream>
 #include "Tree.h"
+
 
 
 using namespace std;
@@ -236,6 +238,46 @@ void Tree::deleteNode(Node* node, string theTerm)
 			cout << "A copy of \"" << minRight->term << "\" has been put in the place of \"" << theTerm << "\".\n";
 			cout << "Now the original \"" << minRight->term << "\" must be deleted.\n";
 			deleteNode(current->right, minRight->term);
+		}
+	}
+}
+
+void Tree::searchNode(Node* node, string theTerm)
+{
+	if (!node)
+	{
+		cout << "THE DATA AIN'T THERE SON" << endl;
+	}
+	else
+	{
+		Node* current = node, *parent = NULL;
+		bool found = false; //Gotta find it if we're searching right?
+		while ((current) && (!found))
+		{
+			if (current->term == theTerm)
+			{
+				found = true;
+			}
+			else
+			{
+				parent = current;
+				if (theTerm > (current->term))
+				{
+					current = current->right;
+				}
+				else
+				{
+					current = current->left;
+				}
+			}
+		}
+		if (!found)
+		{
+			cout << theTerm << " ain't here son, try again." << endl;
+		}
+		else
+		{
+			cout << theTerm << " was found, definition: " << current->definition << endl;
 		}
 	}
 }
