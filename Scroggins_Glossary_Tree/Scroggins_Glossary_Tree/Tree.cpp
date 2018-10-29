@@ -281,3 +281,65 @@ void Tree::searchNode(Node* node, string theTerm)
 		}
 	}
 }
+
+void Tree::editNode(Node* node, string theTerm)
+{
+	if (!node)
+	{
+		cout << "Oh, data, where art thou? NOT HERE" << endl;
+	}
+	else
+	{
+		Node* current = node, *parent = NULL;
+		bool found = false;
+		while ((current) && (!found))
+		{
+			if (current->term == theTerm)
+			{
+				found = true;
+			}
+			else
+			{
+				parent = current;
+				if (theTerm > (current->term))
+				{
+					current = current->right;
+				}
+				else
+				{
+					current = current->left;
+				}
+			}
+		}
+		if (!found)
+		{
+			cout << theTerm << " ain't here son, try again." << endl;
+		}
+		else
+		{
+			string tempTerm, tempDefinition; //Temporary strings to hold new information.
+			cout << theTerm << " was found, definition: " << current->definition << endl; 
+			cout << "Edit the term or leave it the same by pressing enter: " << endl;
+			
+			getline(cin, tempTerm);
+			//cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			//If statement to confirm they actually entered something
+			if (tempTerm == "\n")
+			{
+				current->term = theTerm;
+			}
+			else
+			{
+				current->term = tempTerm;
+			}
+			//cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Now enter the updated definition, again press enter to leave it the same." << endl;
+			getline(cin, tempDefinition);
+			if (tempDefinition != "\n")
+			{
+				current->definition == tempDefinition;
+			}
+			cout << theTerm << " has been updated to: " << current->term << " and the definition is: " << current->definition << endl;
+		}
+	}
+}

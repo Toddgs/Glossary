@@ -17,6 +17,7 @@ public:
 	//FIXME may not need both strings
 	void deleteNode(Node* node, string theTerm);
 	void searchNode(Node* node, string theTerm);
+	void editNode(Node* node, string theTerm);
 	
 	//Basic traversals of the tree.
 	void levelOrder(Node* node);
