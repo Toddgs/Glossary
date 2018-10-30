@@ -27,6 +27,12 @@ public:
 	void preOrder(Node* node);
 	void preOrder() { preOrder(root); }
 
+	//Flashcards...
+	void levelOrderFlashcards(Node* node);
+	void inOrderFlashcards(Node* node);
+	void postOrderFlashcards(Node* node);
+	void preOrderFlashcards(Node* node);
+
 	void inOrderTreeDisplay(Node *node);
 	Node* findMin(Node* node);
 

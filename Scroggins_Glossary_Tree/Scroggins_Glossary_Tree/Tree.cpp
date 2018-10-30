@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <queue>
 #include <iostream>
+#include <conio.h>
 #include "Tree.h"
 
 
@@ -368,4 +369,48 @@ void Tree::stringSearch(Node* node, string theString)
 		}
 		stringSearch(node->right, theString);
 	}	
+}
+
+void Tree::preOrderFlashcards(Node* node)
+{
+	if (node)
+	{
+		string input;
+		
+		cout << node->term << endl << endl;
+		cout << "\nPress any key to see the definition." << endl << endl;
+		_getch();
+		cout << node->definition << endl << endl;
+		_getch();
+		cout << "Press e to exit or any other key to continue." << endl;
+		//cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		getline(cin, input);
+		
+		if (!(input == "e"))
+		{
+			preOrderFlashcards(node->left);
+			preOrderFlashcards(node->right);
+		}
+		else
+		{
+			return;
+		}
+		//cin.clear();
+	}
+}
+
+void Tree::postOrderFlashcards(Node* node)
+{
+
+}
+
+void Tree::inOrderFlashcards(Node* node)
+{
+
+}
+
+void Tree::levelOrderFlashcards(Node* node)
+{
+
 }
