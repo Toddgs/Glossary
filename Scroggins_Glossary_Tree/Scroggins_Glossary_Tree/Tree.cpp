@@ -206,7 +206,7 @@ void Tree::deleteNode(Node* node, string theTerm)
 				parent->right = NULL;
 			}
 			delete current;
-			cout << "\"" << theTerm << "\" has been deleted." << endl;
+			//cout << "\"" << theTerm << "\" has been deleted." << endl;
 		}
 		else if (((current->left) && (!current->right)) || ((!current->left) && (current->right)))
 		{
@@ -228,7 +228,7 @@ void Tree::deleteNode(Node* node, string theTerm)
 				parent->right = child;
 			}
 			delete current;
-			cout << "\"" << theTerm << "\" has been deleted.";
+			//cout << "\"" << theTerm << "\" has been deleted.";
 		}
 		else
 		{
@@ -282,6 +282,26 @@ void Tree::searchNode(Node* node, string theTerm)
 	}
 }
 
+bool Tree::nodeSearch(Node* node, string theTerm)
+{
+	if (node == NULL)
+	{
+		return false;
+	}
+	else if (node->term == theTerm)
+	{
+		return true;
+	}
+	else if (theTerm <= node->term)
+	{
+		return nodeSearch(node->left, theTerm);
+	}
+	else
+	{
+		return nodeSearch(node->right, theTerm);
+	}
+}
+
 void Tree::editNode(Node* node, string theTerm)
 {
 	if (!node)
@@ -320,19 +340,11 @@ void Tree::editNode(Node* node, string theTerm)
 			string tempTerm, tempDefinition; //Temporary strings to hold new information.
 			cout << theTerm << " was found, definition: " << current->definition << endl; 
 			cout << "Edit the term or leave it the same by pressing enter: " << endl;
-			
 			getline(cin, tempTerm);
-			//cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			//If statement to confirm they actually entered something
-			if (tempTerm == "\n")
-			{
-				current->term = theTerm;
-			}
-			else
+			if (tempTerm != "")
 			{
 				current->term = tempTerm;
 			}
-			//cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << "Now enter the updated definition, again press enter to leave it the same." << endl;
 			getline(cin, tempDefinition);
 			if (tempDefinition != "\n")
@@ -342,4 +354,18 @@ void Tree::editNode(Node* node, string theTerm)
 			cout << theTerm << " has been updated to: " << current->term << " and the definition is: " << current->definition << endl;
 		}
 	}
+}
+
+void Tree::stringSearch(Node* node, string theString)
+{
+	if (node)
+	{
+		stringSearch(node->left, theString);
+		if ((node->term.find(theString) <= 1000) || (node->definition.find(theString) <= 1000))
+		{
+			cout << node->term << endl;
+			cout << node->definition << endl << endl;
+		}
+		stringSearch(node->right, theString);
+	}	
 }

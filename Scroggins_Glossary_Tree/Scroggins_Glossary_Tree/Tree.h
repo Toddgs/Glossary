@@ -18,7 +18,8 @@ public:
 	void deleteNode(Node* node, string theTerm);
 	void searchNode(Node* node, string theTerm);
 	void editNode(Node* node, string theTerm);
-	
+	bool nodeSearch(Node* node, string theTerm);
+	void stringSearch(Node* node, string theString);
 	//Basic traversals of the tree.
 	void levelOrder(Node* node);
 	void inOrder(Node* node);
