@@ -20,6 +20,7 @@ public:
 	void editNode(Node* node, string theTerm);
 	bool nodeSearch(Node* node, string theTerm);
 	void stringSearch(Node* node, string theString);
+	void writeToText(Node* node, ofstream & treeTextFile);
 	//Basic traversals of the tree.
 	void levelOrder(Node* node);
 	void inOrder(Node* node);

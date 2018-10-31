@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <queue>
 #include <iostream>
+#include <fstream>
 #include <conio.h>
 #include "Tree.h"
 
@@ -402,37 +403,93 @@ void Tree::postOrderFlashcards(Node* node)
 {
 	if (node)
 	{
-		string input;
-
-		if (input == "e")
-		{
-			return;
-		}
-		else if (input != "e")
-		{
-			postOrderFlashcards(node->left);
-			postOrderFlashcards(node->right);
-		}
-
+		
+		postOrderFlashcards(node->left);
+		postOrderFlashcards(node->right);
 		cout << node->term << endl << endl;
 		cout << "\nPress any key to see the definition." << endl << endl;
 		_getch();
 		cout << node->definition << endl << endl;
 		_getch();
-		cout << "Press e (followed by enter) to exit or any of other key (followed by enter) to continue." << endl;
 
-		cin >> input;
-
-		
 	}
 }
 
 void Tree::inOrderFlashcards(Node* node)
 {
+	string input;
 
+	if (input == "e")
+	{
+		return;
+	}
+	else if (input != "e")
+	{
+		postOrderFlashcards(node->left);
+	}
+	cout << node->term << endl << endl;
+	cout << "\nPress any key to see the definition." << endl << endl;
+	_getch();
+	cout << node->definition << endl << endl;
+	_getch();
+	cout << "Press e (followed by enter) to exit or any of other key (followed by enter) to continue." << endl;
+
+	cin >> input;
+
+	if (input != "e")
+	{
+		postOrderFlashcards(node->right);
+	}
 }
 
 void Tree::levelOrderFlashcards(Node* node)
 {
+	queue<Node*> termQueue;
 
+	termQueue.push(node);
+
+	while (!termQueue.empty())
+	{
+		Node* visitNode = termQueue.front();
+		termQueue.pop();
+
+		cout << visitNode->term << endl << endl;
+		cout << "\nPress any key to see the definition." << endl << endl;
+		_getch();
+		cout << visitNode->definition << endl << endl;
+		_getch();
+
+
+		if (visitNode->left)
+		{
+			termQueue.push(visitNode->left);
+		}
+
+		if (visitNode->right)
+		{
+			termQueue.push(visitNode->right);
+		}
+	}
+}
+
+void Tree::writeToText(Node* node, ofstream & treeTextFile)
+{
+	if (node)
+	{
+		
+		if (!treeTextFile)
+		{
+			cerr << "File ain't here son, better make it!" << endl;
+			exit(1);
+		}
+		else
+		{
+			treeTextFile << node->term << '\t'
+						 << node->definition << '\n';
+			writeToText(node->left, treeTextFile);
+			writeToText(node->right, treeTextFile);
+		}
+
+
+	}
 }
