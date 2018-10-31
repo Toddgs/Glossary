@@ -376,33 +376,55 @@ void Tree::preOrderFlashcards(Node* node)
 	if (node)
 	{
 		string input;
-		
+
 		cout << node->term << endl << endl;
 		cout << "\nPress any key to see the definition." << endl << endl;
 		_getch();
 		cout << node->definition << endl << endl;
 		_getch();
-		cout << "Press e to exit or any other key to continue." << endl;
-		//cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		getline(cin, input);
+		cout << "Press e (followed by enter) to exit or any of other key (followed by enter) to continue." << endl;
 		
-		if (!(input == "e"))
+		cin >> input;
+		
+		if (input == "e")
+		{
+			return;
+		}
+		else if (input != "e")
 		{
 			preOrderFlashcards(node->left);
 			preOrderFlashcards(node->right);
 		}
-		else
-		{
-			return;
-		}
-		//cin.clear();
 	}
 }
 
 void Tree::postOrderFlashcards(Node* node)
 {
+	if (node)
+	{
+		string input;
 
+		if (input == "e")
+		{
+			return;
+		}
+		else if (input != "e")
+		{
+			postOrderFlashcards(node->left);
+			postOrderFlashcards(node->right);
+		}
+
+		cout << node->term << endl << endl;
+		cout << "\nPress any key to see the definition." << endl << endl;
+		_getch();
+		cout << node->definition << endl << endl;
+		_getch();
+		cout << "Press e (followed by enter) to exit or any of other key (followed by enter) to continue." << endl;
+
+		cin >> input;
+
+		
+	}
 }
 
 void Tree::inOrderFlashcards(Node* node)
