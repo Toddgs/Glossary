@@ -17,3 +17,4 @@ Max Heap Property	Each node in a tree has a key which is less than or equal to t
 Min Heap Property	each node in a tree has a key which is greater than or equal to the key of its parent
 Perfect Hash Position	A hash function that places all the data in their home positions without any collisions
 Quadratic Probing	A collision resolution scheme designed to avoid clustering. Instead of probing simply to the next availible position, ... checks first for the next position, but then check for the 4th, than 9th.
+Scroggins, Todd	OMG HE'S SO GREAT
