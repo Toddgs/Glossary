@@ -14,10 +14,8 @@ public:
 	Node* getRoot() { return root; } //Returns the root pointer.
 	bool isEmpty() { return (root == NULL); } //Checks to see if there is anything in the tree.
 	void addNode(string theTerm, string theDefinition);
-	//FIXME may not need both strings
 	void deleteNode(Node* node, string theTerm);
 	void searchNode(Node* node, string theTerm);
-	void editNode(Node* node, string theTerm);
 	bool nodeSearch(Node* node, string theTerm);
 	void stringSearch(Node* node, string theString);
 	void writeToText(Node* node, ofstream & treeTextFile);

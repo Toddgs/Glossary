@@ -35,7 +35,6 @@ void Tree::addNode(string theTerm, string theDefinition)
 {
 	if (isEmpty())
 	{
-		//cout << "Add root node..." << theTerm << endl;
 		Node* node = new Node();
 		node->term = theTerm;
 		node->definition = theDefinition;
@@ -43,7 +42,6 @@ void Tree::addNode(string theTerm, string theDefinition)
 	}
 	else
 	{
-		//cout << "Add new node: " << theTerm << endl;
 		addNode(theTerm, theDefinition, root);
 	}
 }
@@ -166,21 +164,21 @@ void Tree::inOrderTreeDisplay(Node *node)
 
 void Tree::deleteNode(Node* node, string theTerm)
 {
-	if (!node)
+	if (!node) //Check and make sure there is a node.
 	{
 		cout << "The data \"" << theTerm << "\" wasn't found. (Data set empty)\n";
 	}
-	else
+	else //If there is a node, DO STUFF
 	{
-		Node* current = node, *parent = NULL;
-		bool found = false;
-		while ((current) && (!found))
+		Node* current = node, *parent = NULL; //create and set pointer variables.
+		bool found = false; //Boolean values to determine if we've found what we're looking for.
+		while ((current) && (!found)) //While there is a node and it isn't found continue looping.
 		{
-			if (current->term == theTerm)
+			if (current->term == theTerm) //Check to see if the this term matches the term we were given.
 			{
 				found = true;
 			}
-			else
+			else //If not, Move on down the line, moving closer each time we check and fail to find it.
 			{
 				parent = current;
 				if (theTerm > (current->term))
@@ -193,11 +191,11 @@ void Tree::deleteNode(Node* node, string theTerm)
 				}
 			}
 		}
-		if (!found)
+		if (!found) //If the term is not found.
 		{
 			cout << theTerm << " not in the data set. (the tree)" << endl;
 		}
-		else if ((!current->left) && (!current->right))
+		else if ((!current->left) && (!current->right)) //Deletes the node if it is the last node in the tree.
 		{
 			if ((parent) && (parent->left == current))
 			{
@@ -208,11 +206,11 @@ void Tree::deleteNode(Node* node, string theTerm)
 				parent->right = NULL;
 			}
 			delete current;
-			//cout << "\"" << theTerm << "\" has been deleted." << endl;
 		}
-		else if (((current->left) && (!current->right)) || ((!current->left) && (current->right)))
+		else if (((current->left) && (!current->right)) || ((!current->left) && (current->right))) //Moves the nodes around as needed to allow the deletion of a node with no dangling pointers.
 		{
-			Node* child;
+			Node* child; 
+			//The following if/else segment checks to make sure there isn't a node to the left or right, if there is, it moves the node before deleting it. 
 			if (current->left)
 			{
 				child = current->left;
@@ -230,9 +228,8 @@ void Tree::deleteNode(Node* node, string theTerm)
 				parent->right = child;
 			}
 			delete current;
-			//cout << "\"" << theTerm << "\" has been deleted.";
 		}
-		else
+		else //Emergency case, in case of real weirdness. 
 		{
 			Node *minRight = findMin(current->right);
 			current->term = minRight->term;
@@ -244,23 +241,23 @@ void Tree::deleteNode(Node* node, string theTerm)
 	}
 }
 
-void Tree::searchNode(Node* node, string theTerm)
+void Tree::searchNode(Node* node, string theTerm) //Searches for a node in the tree by the term included.
 {
-	if (!node)
+	if (!node) //Checks to make sure a node is present. 
 	{
 		cout << "THE DATA AIN'T THERE SON" << endl;
 	}
 	else
 	{
-		Node* current = node, *parent = NULL;
+		Node* current = node, *parent = NULL; //Temp pointer variables
 		bool found = false; //Gotta find it if we're searching right?
 		while ((current) && (!found))
 		{
-			if (current->term == theTerm)
+			if (current->term == theTerm) //If it is found, tells us so.
 			{
 				found = true;
 			}
-			else
+			else //If not, continues to find it.
 			{
 				parent = current;
 				if (theTerm > (current->term))
@@ -273,9 +270,9 @@ void Tree::searchNode(Node* node, string theTerm)
 				}
 			}
 		}
-		if (!found)
+		if (!found) //If it isn't found, displays a message to the user that the term hasn't been found.
 		{
-			cout << theTerm << " ain't here son, try again." << endl;
+			cout << theTerm << " ain't here son, try again. Remember! Uppercase/lowercase matters!" << endl;
 		}
 		else
 		{
@@ -284,7 +281,7 @@ void Tree::searchNode(Node* node, string theTerm)
 	}
 }
 
-bool Tree::nodeSearch(Node* node, string theTerm)
+bool Tree::nodeSearch(Node* node, string theTerm) //Checks to see if a node exists, used as a helper function for other code.
 {
 	if (node == NULL)
 	{
@@ -304,66 +301,13 @@ bool Tree::nodeSearch(Node* node, string theTerm)
 	}
 }
 
-void Tree::editNode(Node* node, string theTerm)
-{
-	if (!node)
-	{
-		cout << "Oh, data, where art thou? NOT HERE" << endl;
-	}
-	else
-	{
-		Node* current = node, *parent = NULL;
-		bool found = false;
-		while ((current) && (!found))
-		{
-			if (current->term == theTerm)
-			{
-				found = true;
-			}
-			else
-			{
-				parent = current;
-				if (theTerm > (current->term))
-				{
-					current = current->right;
-				}
-				else
-				{
-					current = current->left;
-				}
-			}
-		}
-		if (!found)
-		{
-			cout << theTerm << " ain't here son, try again." << endl;
-		}
-		else
-		{
-			string tempTerm, tempDefinition; //Temporary strings to hold new information.
-			cout << theTerm << " was found, definition: " << current->definition << endl; 
-			cout << "Edit the term or leave it the same by pressing enter: " << endl;
-			getline(cin, tempTerm);
-			if (tempTerm != "")
-			{
-				current->term = tempTerm;
-			}
-			cout << "Now enter the updated definition, again press enter to leave it the same." << endl;
-			getline(cin, tempDefinition);
-			if (tempDefinition != "\n")
-			{
-				current->definition == tempDefinition;
-			}
-			cout << theTerm << " has been updated to: " << current->term << " and the definition is: " << current->definition << endl;
-		}
-	}
-}
 
-void Tree::stringSearch(Node* node, string theString)
+void Tree::stringSearch(Node* node, string theString) //Searches for a string within the Term and Definition of a node. If found, it displays them.
 {
 	if (node)
 	{
 		stringSearch(node->left, theString);
-		if ((node->term.find(theString) <= 1000) || (node->definition.find(theString) <= 1000))
+		if ((node->term.find(theString) <= 1000) || (node->definition.find(theString) <= 1000)) //The .find string operator returns the function no_pos if the string is not found, this returns a huge positive number, thus the need for less than 1000.
 		{
 			cout << node->term << endl;
 			cout << node->definition << endl << endl;
@@ -372,7 +316,7 @@ void Tree::stringSearch(Node* node, string theString)
 	}	
 }
 
-void Tree::preOrderFlashcards(Node* node)
+void Tree::preOrderFlashcards(Node* node) //Flashcard function with preorder traversal.
 {
 	if (node)
 	{
@@ -387,11 +331,11 @@ void Tree::preOrderFlashcards(Node* node)
 		
 		cin >> input;
 		
-		if (input == "e")
+		if (input == "e") //If statements allow exiting the loop if desired. Thought it would be a nice touch.
 		{
 			return;
 		}
-		else if (input != "e")
+		else if (input != "e") //If not exited, recursively displays more flashcards.
 		{
 			preOrderFlashcards(node->left);
 			preOrderFlashcards(node->right);
@@ -399,7 +343,7 @@ void Tree::preOrderFlashcards(Node* node)
 	}
 }
 
-void Tree::postOrderFlashcards(Node* node)
+void Tree::postOrderFlashcards(Node* node) //Flashcards with post order traversal.
 {
 	if (node)
 	{
@@ -415,7 +359,7 @@ void Tree::postOrderFlashcards(Node* node)
 	}
 }
 
-void Tree::inOrderFlashcards(Node* node)
+void Tree::inOrderFlashcards(Node* node) //Flash cards with in order traversal.
 {
 	string input;
 
@@ -442,7 +386,7 @@ void Tree::inOrderFlashcards(Node* node)
 	}
 }
 
-void Tree::levelOrderFlashcards(Node* node)
+void Tree::levelOrderFlashcards(Node* node) //Flash cards with level order traversal.
 {
 	queue<Node*> termQueue;
 
@@ -472,7 +416,7 @@ void Tree::levelOrderFlashcards(Node* node)
 	}
 }
 
-void Tree::writeToText(Node* node, ofstream & treeTextFile)
+void Tree::writeToText(Node* node, ofstream & treeTextFile) //A save function for the file. Needs to be passed the root and the text file to be saved to.
 {
 	if (node)
 	{
